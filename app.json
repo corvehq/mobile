@@ -25,6 +25,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bea28816-b284-4ea2-a5f4-4a9ae2aeaaeb"
+      }
+    },
+    "owner": "nelson404",
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
