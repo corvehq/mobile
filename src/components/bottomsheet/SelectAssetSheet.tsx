@@ -1,30 +1,19 @@
-import {
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-} from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import RBSheet, { RBSheetRef } from "react-native-raw-bottom-sheet";
 import {
     heightPercentageToDP as hp,
     widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-import { nigerianBanks } from "../../data/nigerianBanks";
-import { useState } from "react";
-import { AssetListTypes, BankListTypes } from "../../utils/types";
-import { createFilter } from "../../utils/arrayFilter";
-import { Image } from "expo-image";
-import { blurhash } from "../../styles/const";
+import { Dispatch, LegacyRef } from "react";
+import { AssetListTypes } from "../../utils/types";
 import { assetList } from "../../data/assetList";
 
 const SelectAssetSheet = ({
     selectAssetSheet,
     setSelectedAsset,
 }: {
-    selectAssetSheet: any;
-    setSelectedAsset: any;
+    selectAssetSheet: LegacyRef<RBSheetRef> | any;
+    setSelectedAsset: Dispatch<AssetListTypes>;
 }) => {
     return (
         <>

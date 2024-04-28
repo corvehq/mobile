@@ -1,19 +1,25 @@
 import { useFonts } from "expo-font";
-import { Platform, Text, TextProps } from "react-native";
+import { Platform, Text } from "react-native";
 import Toast from "react-native-toast-message";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import AppNavigation from "./src/route";
 
-const defaultProps: TextProps = {
-    allowFontScaling: false,
-};
+interface TextWithDefaultProps extends Text {
+    defaultProps?: { allowFontScaling?: boolean };
+}
+
+(Text as unknown as TextWithDefaultProps).defaultProps =
+    (Text as unknown as TextWithDefaultProps).defaultProps || {};
+(Text as unknown as TextWithDefaultProps).defaultProps!.allowFontScaling =
+    false;
 
 const App = () => {
     const [loaded] = useFonts({
-        Bricolage: require("./src/assets/fonts/sfregular.otf"),
-        BricolageLight: require("./src/assets/fonts/sflight.otf"),
+        Bricolage: require("./src/assets/fonts/SanFransisco.ttf"),
+        BricolageLight: require("./src/assets/fonts/SanFransisco.ttf"),
+        NumberFont: require("./src/assets/fonts/new/ClashDisplayRegular.otf"),
         SFBold: require("./src/assets/fonts/sfbold.otf"),
         LatoBold: require("./src/assets/fonts/Lato-Bold.ttf"),
         Inter: require("./src/assets/fonts/inter-regular.otf"),

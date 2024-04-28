@@ -6,6 +6,13 @@ export interface HomeActionType {
     icon: React.JSX.Element;
 }
 
+export type RBSheetCustomRef = {
+    current: {
+        open: () => void;
+        close: () => void;
+    };
+};
+
 export type Nav = {
     navigate: (value: string, objectValue?: any) => void;
     goBack: any;
@@ -37,4 +44,22 @@ export interface AssetListTypes {
     asset: string;
     symbol: React.JSX.Element;
     assetId: string;
+}
+
+export interface BottomTabButtonTypes {
+    title: string;
+    routeTitle: string;
+    icon: (active: boolean) => React.JSX.Element;
+}
+
+export interface ProfileCredType {
+    title: string;
+    data: string;
+    screen: string | null;
+}
+
+export interface SecurityCredType {
+    title: string;
+    screen: string;
+    toggle: boolean;
 }

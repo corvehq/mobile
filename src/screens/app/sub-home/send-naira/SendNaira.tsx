@@ -11,29 +11,41 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { sendNairaStyle } from "../../../../styles/homeStyle";
-import { globalScrollViewStyle } from "../../../../styles/const";
+import {
+    globalFullButtonStyle,
+    globalScrollViewStyle,
+} from "../../../../styles/const";
 import NavigationHeaderBar from "../../../../components/tab/NavigationHeaderBar";
 import BeneficiariesScroll from "../../../../components/sections/BeneficiairiesScroll";
 import { useRef, useState } from "react";
 import SelectBankSheet from "../../../../components/bottomsheet/SelectBankSheet";
 import { useNavigation } from "@react-navigation/native";
-import { Nav } from "../../../../utils/types";
+import { BankListTypes, Nav } from "../../../../utils/types";
 import { toastNotification } from "../../../../utils/toast";
+import { formatter } from "../../../../utils/formatCurrency";
 const StatusBarManager = NativeModules;
 
 const SendNairaScreen = () => {
-    const selectBankSheet: any = useRef();
-    const [selectedBank, setSelectedBank] = useState<any>(null);
-    const [amount, setAmount] = useState("");
-    const [description, setDescription] = useState("");
+    const selectBankSheet = useRef<any>();
+    const [selectedBank, setSelectedBank] = useState<BankListTypes | null>(
+        null,
+    );
+    const [amount, setAmount] = useState<string>("");
+    const [accountNumber, setAccountNumber] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
     const { navigate } = useNavigation<Nav>();
 
     const verifyDetailsAndProceed = () => {
-        if (selectedBank === null || amount === "" || description === "") {
+        if (
+            selectedBank === null ||
+            amount === "" ||
+            description === "" ||
+            accountNumber === ""
+        ) {
             toastNotification(
                 "error",
                 "Missing field",
-                "A required field is empty"
+                "A required field is empty",
             );
             return;
         }
@@ -42,6 +54,8 @@ const SendNairaScreen = () => {
                 selectedBank,
                 amount,
                 description,
+                successComponent: `<p style='padding-left: 40; padding-right: 40; text-align: center; font-family: BricolageLight; letter-spacing: 0.2; color: rgba(0,0,0,0.75); line-height: 25;
+                font-size: 20px;'>Your transfer of <strong>${formatter.format(parseInt(amount))}</strong> to <strong>NELSON DAVID</strong> was successful</p>`,
             },
         });
     };
@@ -165,6 +179,32 @@ const SendNairaScreen = () => {
                                 )}
                             </Pressable>
                         </View>
+
+                        <View
+                            style={
+                                styles.sendNairaScreen.screenContent.inputDiv
+                            }
+                        >
+                            <Text
+                                style={
+                                    styles.sendNairaScreen.screenContent
+                                        .inputDiv.label
+                                }
+                            >
+                                Account Number
+                            </Text>
+                            <TextInput
+                                placeholder="Account Number"
+                                placeholderTextColor="rgba(22,35,2,0.35)"
+                                style={
+                                    styles.sendNairaScreen.screenContent
+                                        .inputDiv.customInput
+                                }
+                                value={accountNumber}
+                                onChangeText={(e) => setAccountNumber(e)}
+                            />
+                        </View>
+
                         <View
                             style={
                                 styles.sendNairaScreen.screenContent.inputDiv
@@ -189,24 +229,17 @@ const SendNairaScreen = () => {
                                 onChangeText={(e) => setDescription(e)}
                             />
                         </View>
+
                         <View
                             style={
                                 styles.sendNairaScreen.screenContent.buttonDiv
                             }
                         >
                             <Pressable
-                                style={
-                                    styles.sendNairaScreen.screenContent
-                                        .buttonDiv.button
-                                }
+                                style={globalFullButtonStyle}
                                 onPress={verifyDetailsAndProceed}
                             >
-                                <Text
-                                    style={
-                                        styles.sendNairaScreen.screenContent
-                                            .buttonDiv.button.text
-                                    }
-                                >
+                                <Text style={globalFullButtonStyle.text}>
                                     Next
                                 </Text>
                             </Pressable>

@@ -9,22 +9,41 @@ import {
     heightPercentageToDP as hp,
     widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-// import { isBalanceHidden } from "../../utils/jotaiAtoms";
 import EyeSlashIcon from "../../assets/icons/EyeSlashIcon";
 import EyeIcon from "../../assets/icons/EyeIcon";
-import { useState } from "react";
-import {
-    defaultAccentColor,
-    defaultAppGreen,
-    defaultMainFont,
-} from "../../styles/const";
+import { defaultAccentColor, defaultAppGreen } from "../../styles/const";
 import FundWalletIcon from "../../assets/icons/FundWalletIcon";
 import { useNavigation } from "@react-navigation/native";
 import { Nav } from "../../utils/types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAtom } from "jotai";
+import { isBalanceHidden } from "../../utils/jotaiAtoms";
+import { useEffect, useState } from "react";
 
 const BalanceCard = () => {
     const { navigate } = useNavigation<Nav>();
     const [isBalancHiddenState, setIsBalanceHiddenState] = useState(false);
+
+    useEffect(() => {
+        AsyncStorage.getItem("isBalancHiddenStates").then((data: any) => {
+            setIsBalanceHiddenState(Boolean(data));
+            if (data === "true") {
+                setIsBalanceHiddenState(true);
+            } else {
+                setIsBalanceHiddenState(false);
+            }
+        });
+    }, []);
+
+    const toggleBalanceDisplay = async () => {
+        if (isBalancHiddenState) {
+            await AsyncStorage.setItem("isBalancHiddenStates", "false");
+            setIsBalanceHiddenState(false);
+        } else {
+            setIsBalanceHiddenState(true);
+            await AsyncStorage.setItem("isBalancHiddenStates", "true");
+        }
+    };
 
     return (
         <View style={styles.balanceCardWrapper}>
@@ -39,28 +58,28 @@ const BalanceCard = () => {
                             styles.balanceCardWrapper.balanceCard.view
                                 .balanceTextDiv
                         }
-                        onPress={() =>
-                            setIsBalanceHiddenState(!isBalancHiddenState)
-                        }
+                        onPress={toggleBalanceDisplay}
                     >
                         {isBalancHiddenState ? (
                             <Text
                                 style={{
                                     ...styles.balanceCardWrapper.balanceCard
                                         .view.balanceTextDiv.balanceText,
-                                    paddingTop: hp(1),
+                                    color: "red",
+                                    letterSpacing: 1.5,
                                 }}
                             >
-                                * * * * * * *
+                                ₦500,000{" "}
                             </Text>
                         ) : (
                             <Text
-                                style={
-                                    styles.balanceCardWrapper.balanceCard.view
-                                        .balanceTextDiv.balanceText
-                                }
+                                style={{
+                                    ...styles.balanceCardWrapper.balanceCard
+                                        .view.balanceTextDiv.balanceText,
+                                    letterSpacing: 1.5,
+                                }}
                             >
-                                ₦500,000
+                                ₦500,000{" "}
                             </Text>
                         )}
                         <Pressable
@@ -68,17 +87,15 @@ const BalanceCard = () => {
                                 styles.balanceCardWrapper.balanceCard.view
                                     .balanceTextDiv.eyeIconButton
                             }
-                            onPress={() =>
-                                setIsBalanceHiddenState(!isBalancHiddenState)
-                            }
+                            onPress={toggleBalanceDisplay}
                         >
                             {isBalancHiddenState ? (
-                                <EyeIcon
+                                <EyeSlashIcon
                                     color="#ffffff"
                                     size={{ width: "17", height: "17" }}
                                 />
                             ) : (
-                                <EyeSlashIcon
+                                <EyeIcon
                                     color="#ffffff"
                                     size={{ width: "17", height: "17" }}
                                 />
@@ -146,15 +163,15 @@ const styles = StyleSheet.create({
                     alignItems: "center",
                     height: 51,
                     balanceText: {
-                        color: "rgba(255,255,255,1)",
-                        fontSize: 38,
-                        letterSpacing: 0.8,
-                        fontFamily: "BricolageLight",
+                        // borderWidth: 1,
+                        // borderColor: "red",
+                        fontSize: 37,
+                        fontFamily: "NumberFont",
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "flex-start",
-                        height: "100%",
                         paddingTop: hp(0.4),
+                        color: "#ffffff",
                     },
                     eyeIconButton: {
                         height: "100%",
@@ -162,13 +179,14 @@ const styles = StyleSheet.create({
                         alignItems: "center",
                         justifyContent: "flex-start",
                         marginLeft: -5,
+                        marginTop: 5,
                     },
                 },
                 fundButtonDiv: {
                     paddingTop: hp(2.5),
                     button: {
-                        height: 50,
-                        width: 160,
+                        height: 53,
+                        width: 180,
                         borderRadius: 11,
                         flexDirection: "row",
                         justifyContent: "center",
@@ -177,8 +195,8 @@ const styles = StyleSheet.create({
                         backgroundColor: "#ffffff",
                         text: {
                             color: defaultAppGreen,
-                            fontFamily: "BricolageLight",
-                            letterSpacing: 0.8,
+                            fontFamily: "NumberFont",
+                            letterSpacing: 0.2,
                             fontSize: 19,
                         },
                     },

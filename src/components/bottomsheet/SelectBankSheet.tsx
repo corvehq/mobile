@@ -6,14 +6,14 @@ import {
     TextInput,
     View,
 } from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet";
+import RBSheet, { RBSheetRef } from "react-native-raw-bottom-sheet";
 import {
     heightPercentageToDP as hp,
     widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import { nigerianBanks } from "../../data/nigerianBanks";
-import { useState } from "react";
-import { BankListTypes } from "../../utils/types";
+import { Dispatch, LegacyRef, MutableRefObject, useState } from "react";
+import { BankListTypes, RBSheetCustomRef } from "../../utils/types";
 import { createFilter } from "../../utils/arrayFilter";
 import { Image } from "expo-image";
 import { blurhash } from "../../styles/const";
@@ -22,8 +22,8 @@ const SelectBankSheet = ({
     selectBankSheet,
     setSelectedBank,
 }: {
-    selectBankSheet: any;
-    setSelectedBank: any;
+    selectBankSheet: LegacyRef<RBSheetRef> | any;
+    setSelectedBank: Dispatch<BankListTypes>;
 }) => {
     const [searchInput, setSearchInput] = useState("");
     const KEYS_TO_FILTERS = ["name", "code"];

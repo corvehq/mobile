@@ -1,0 +1,148 @@
+import {
+    Image,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+} from "react-native";
+import RBSheet, { RBSheetRef } from "react-native-raw-bottom-sheet";
+import {
+    heightPercentageToDP as hp,
+    widthPercentageToDP as wp,
+} from "react-native-responsive-screen";
+import { Dispatch, LegacyRef } from "react";
+import { AssetListTypes } from "../../utils/types";
+import { assetList } from "../../data/assetList";
+import { metreTypeList } from "../../data/metreTypeList";
+import ChevronRightIcon from "../../assets/icons/ChevronRightIcon";
+
+const SelectMTSheet = ({
+    selectMTSheet,
+    setSelectedMT,
+}: {
+    selectMTSheet: LegacyRef<RBSheetRef> | any;
+    setSelectedMT: any;
+}) => {
+    return (
+        <>
+            <RBSheet
+                customStyles={{
+                    ...styles.bottomSheet,
+                    wrapper: {
+                        backgroundColor: "rgba(0,0,0,0.2)",
+                        padding: wp(0.5),
+                    },
+                    draggableIcon: {
+                        backgroundColor: "grey",
+                    },
+                    container: {
+                        backgroundColor: "#f2f2f2",
+                        borderRadius: 20,
+                    },
+                }}
+                customModalProps={{
+                    animationType: "slide",
+                    statusBarTranslucent: true,
+                }}
+                height={hp(30)}
+                openDuration={150}
+                closeDuration={150}
+                ref={selectMTSheet}
+                draggable
+            >
+                <View style={styles.bottomSheet.sheetContent}>
+                    <Text style={styles.bottomSheet.sheetContent.title}>
+                        Metre Type
+                    </Text>
+                    <ScrollView
+                        style={styles.bottomSheet.sheetContent.list}
+                        showsVerticalScrollIndicator={false}
+                    >
+                        {metreTypeList.map((metre: string, index: number) => {
+                            return (
+                                <Pressable
+                                    key={index}
+                                    style={
+                                        styles.bottomSheet.sheetContent.list
+                                            .button
+                                    }
+                                    onPress={() => {
+                                        setSelectedMT(metre);
+                                        selectMTSheet.current.close();
+                                    }}
+                                >
+                                    <Text
+                                        style={
+                                            styles.bottomSheet.sheetContent.list
+                                                .button.text
+                                        }
+                                    >
+                                        {metre}
+                                    </Text>
+                                    <Pressable
+                                        style={{ marginLeft: "auto" }}
+                                        onPress={() => {
+                                            setSelectedMT(metre);
+                                            selectMTSheet.current.close();
+                                        }}
+                                    >
+                                        <ChevronRightIcon color="rgba(0,0,0,0.5)" />
+                                    </Pressable>
+                                </Pressable>
+                            );
+                        })}
+                    </ScrollView>
+                </View>
+            </RBSheet>
+        </>
+    );
+};
+
+const styles = StyleSheet.create({
+    bottomSheet: {
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        sheetContent: {
+            padding: 15,
+            alignItems: "stretch",
+            title: {
+                fontSize: 19,
+                fontWeight: "400",
+                letterSpacing: 0.4,
+                color: "rgba(0,0,0,0.7)",
+                textAlign: "center",
+                fontFamily: "BricolageLight",
+                paddingBottom: 10,
+            },
+            list: {
+                padding: 10,
+                paddingTop: 15,
+                button: {
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    paddingTop: 20,
+                    paddingBottom: 20,
+                    gap: 10,
+                    image: {
+                        width: 42,
+                        height: 42,
+                        borderRadius: 60,
+                        borderWidth: 1.5,
+                        borderColor: "rgba(0,0,0,0.15)",
+                    },
+                    text: {
+                        fontSize: 17,
+                        letterSpacing: 0.3,
+                        color: "rgba(0,0,0,0.9)",
+                        fontFamily: "BricolageLight",
+                        textTransform: "capitalize",
+                    },
+                },
+            },
+        },
+    },
+} as any);
+
+export default SelectMTSheet;

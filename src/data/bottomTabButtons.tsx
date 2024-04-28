@@ -1,35 +1,48 @@
+import CogIcon from "../assets/icons/CogIcon";
 import HistoryIcon from "../assets/icons/HistoryIcon";
 import HomeIcon from "../assets/icons/HomeIcon";
 import NewsIcon from "../assets/icons/NewsIcon";
-import UsersIcon from "../assets/icons/UsersIcon";
+import ScanCodeIcon from "../assets/icons/ScanCodeIcon";
+import { defaultAppGreen } from "../styles/const";
+import { BottomTabButtonTypes } from "../utils/types";
 
-export const bottomTabButtons = [
+export const bottomTabButtons: BottomTabButtonTypes[] = [
     {
         title: "Home",
-        routeTitle: "Dashboard",
+        routeTitle: "Home",
         icon: (active: boolean) => (
-            <HomeIcon color={active ? "#ffffff" : "rgba(0,0,0,0.3)"} />
+            <HomeIcon color={active ? defaultAppGreen : "rgba(0,0,0,0.3)"} />
         ),
     },
     {
         title: "History",
         routeTitle: "History",
         icon: (active: boolean) => (
-            <HistoryIcon color={active ? "#ffffff" : "rgba(0,0,0,0.3)"} />
+            <HistoryIcon color={active ? defaultAppGreen : "rgba(0,0,0,0.3)"} />
+        ),
+    },
+    {
+        title: "Scan Code",
+        routeTitle: "ScanCode",
+        icon: (active: boolean) => (
+            <ScanCodeIcon
+                color={active ? defaultAppGreen : "rgba(255,255,255,1)"}
+                size={{ width: "30", height: "30" }}
+            />
         ),
     },
     {
         title: "News",
         routeTitle: "News",
         icon: (active: boolean) => (
-            <NewsIcon color={active ? "#ffffff" : "rgba(0,0,0,0.3)"} />
+            <NewsIcon color={active ? defaultAppGreen : "rgba(0,0,0,0.3)"} />
         ),
     },
     {
-        title: "Profile",
+        title: "Settings",
         routeTitle: "Settings",
         icon: (active: boolean) => (
-            <UsersIcon color={active ? "#ffffff" : "rgba(0,0,0,0.3)"} />
+            <CogIcon color={active ? defaultAppGreen : "rgba(0,0,0,0.3)"} />
         ),
     },
 ];

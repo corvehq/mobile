@@ -10,7 +10,7 @@ export const beneficiaryList: BeneficiaryTypes[] = [
         image: require("../assets/images/beneficiaries/man2.png"),
     },
     {
-        name: "John Doe",
+        name: "Emmanuel C.",
         image: require("../assets/images/beneficiaries/man1.jpg"),
     },
     {

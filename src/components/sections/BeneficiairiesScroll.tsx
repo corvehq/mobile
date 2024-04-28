@@ -73,7 +73,7 @@ const BeneficiariesScroll = () => {
                                 </Text>
                             </Pressable>
                         );
-                    }
+                    },
                 )}
             </ScrollView>
         </View>
@@ -92,12 +92,12 @@ const styles = StyleSheet.create({
             paddingTop: hp(1),
             paddingBottom: hp(1),
             actionButton: {
-                marginRight: wp(6),
+                marginRight: 20,
                 flexDirection: "column",
                 alignItems: "center",
                 iconButton: {
-                    width: 52,
-                    height: 52,
+                    width: 60,
+                    height: 60,
                     borderRadius: 60,
                     alignItems: "center",
                     justifyContent: "center",

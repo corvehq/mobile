@@ -9,9 +9,21 @@ import {
     widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
+import { useRef } from "react";
+import MoreActionsSheet from "../bottomsheet/MoreActionsSheet";
 
 const ActionButtonsCard = () => {
     const { navigate } = useNavigation<Nav>();
+    const moreActionSheet: any = useRef();
+
+    const navigateFunction = (screen: string) => {
+        console.log("SCREEN: ", screen);
+        if (screen === "More") {
+            moreActionSheet.current.open();
+        } else {
+            navigate(screen);
+        }
+    };
 
     return (
         <>
@@ -42,9 +54,11 @@ const ActionButtonsCard = () => {
                         <Pressable
                             key={index}
                             style={styles.utilityActions.button}
+                            onPress={() => navigateFunction(action.screen)}
                         >
                             <Pressable
                                 style={styles.utilityActions.button.iconDiv}
+                                onPress={() => navigateFunction(action.screen)}
                             >
                                 {action.icon}
                             </Pressable>
@@ -55,6 +69,7 @@ const ActionButtonsCard = () => {
                     );
                 })}
             </View>
+            <MoreActionsSheet moreActionSheet={moreActionSheet} />
         </>
     );
 };
@@ -99,9 +114,9 @@ const styles = StyleSheet.create({
             text: {
                 paddingTop: hp(1),
                 fontFamily: "BricolageLight",
-                letterSpacing: 0.4,
-                color: "rgba(0,0,0,0.9)",
-                fontSize: 12,
+                letterSpacing: 0.1,
+                color: "rgba(0,0,0,0.85)",
+                fontSize: 11.5,
             },
         },
     },

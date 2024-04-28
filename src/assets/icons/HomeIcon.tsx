@@ -10,8 +10,8 @@ const HomeIcon = ({
     return (
         <>
             <Svg
-                width={size ? size.width : "22"}
-                height={size ? size.height : "22"}
+                width={size ? size.width : "24"}
+                height={size ? size.height : "24"}
                 viewBox="0 0 24 24"
                 fill="none"
             >

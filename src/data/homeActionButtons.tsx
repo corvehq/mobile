@@ -2,6 +2,8 @@ import BuyAirtimeIcon from "../assets/icons/BuyAirtimeIcon";
 import BuyDataIcon from "../assets/icons/BuyDataIcon";
 import BuyIcon from "../assets/icons/BuyIcon";
 import ElectricityIcon from "../assets/icons/ElectricityIcon";
+import InternetIcon from "../assets/icons/InternetIcon";
+import MoreIcon from "../assets/icons/MoreIcon";
 import ReceiveIcon from "../assets/icons/ReceiveIcon";
 import SendIcon from "../assets/icons/SendIcon";
 import TvSubIcon from "../assets/icons/TvSubIcon";
@@ -30,21 +32,44 @@ export const utilityActions: HomeActionType[] = [
     {
         title: "Buy Data",
         screen: "BuyData",
-        icon: <BuyDataIcon size={{ width: "28", height: "28" }} />,
+        icon: <BuyDataIcon size={{ width: "25", height: "25" }} />,
     },
     {
         title: "Buy Airtime",
         screen: "BuyAirtime",
-        icon: <BuyAirtimeIcon size={{ width: "28", height: "28" }} />,
+        icon: <BuyAirtimeIcon size={{ width: "25", height: "25" }} />,
     },
+    // {
+    //     title: "Internet",
+    //     screen: "Internet",
+    //     icon: <InternetIcon size={{ width: "25", height: "25" }} />,
+    // },
     {
         title: "Electricity",
         screen: "BuyElectricity",
-        icon: <ElectricityIcon size={{ width: "28", height: "28" }} />,
+        icon: <ElectricityIcon size={{ width: "25", height: "25" }} />,
+    },
+    {
+        title: "More",
+        screen: "More",
+        icon: <MoreIcon size={{ width: "25", height: "25" }} />,
+    },
+    // {
+    //     title: "Tv Subscription",
+    //     screen: "TvSubscription",
+    //     icon: <TvSubIcon size={{ width: "25", height: "25" }} />,
+    // },
+];
+
+export const moreUtilityActions: HomeActionType[] = [
+    {
+        title: "Internet",
+        screen: "Internet",
+        icon: <InternetIcon size={{ width: "25", height: "25" }} />,
     },
     {
         title: "Tv Subscription",
         screen: "TvSubscription",
-        icon: <TvSubIcon size={{ width: "28", height: "28" }} />,
+        icon: <TvSubIcon size={{ width: "25", height: "25" }} />,
     },
 ];

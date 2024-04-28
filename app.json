@@ -15,13 +15,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSContactsUsageDescription": "Allow Ajianpay to access your contacts."
+      },
+      "bundleIdentifier": "com.ajianlabs.ajianpay"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS"
+      ],
+      "package": "com.ajianlabs.ajianpay"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,7 +42,13 @@
     },
     "owner": "nelson404",
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow Ajianpay to access your contacts."
+        }
+      ]
     ]
   }
 }

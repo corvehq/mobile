@@ -14,17 +14,27 @@ import NavigationHeaderBar from "../../../components/tab/NavigationHeaderBar";
 import { qrCodeStyle, requestPaymentStyle } from "../../../styles/homeStyle";
 import { TextInput } from "react-native-gesture-handler";
 import ButtonScanIcon from "../../../assets/icons/ButtonScanIcon";
-import ButtonShareIcon from "../../../assets/icons/ButtonShareIcon";
-import { useEffect, useRef, useState } from "react";
+import {
+    Dispatch,
+    LegacyRef,
+    SetStateAction,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import SelectAssetSheet from "../../../components/bottomsheet/SelectAssetSheet";
 import SendENairaIcon from "../../../assets/icons/SendENairaIcon";
+import { AssetListTypes, RBSheetCustomRef } from "../../../utils/types";
+import { RBSheetRef } from "react-native-raw-bottom-sheet";
 const StatusBarManager = NativeModules;
 
 const RequestPaymentScreen = () => {
-    const [activeTab, setActiveTab] = useState(0);
-    const selectAssetSheet: any = useRef();
-    const [selectedAsset, setSelectedAsset] = useState<any>(null);
-    const [fluidTitle, setFluidTitle] = useState("Request Payment");
+    const [activeTab, setActiveTab] = useState<number>(0);
+    const selectAssetSheet = useRef<any>(null);
+    const [selectedAsset, setSelectedAsset] = useState<AssetListTypes | null>(
+        null
+    );
+    const [fluidTitle, setFluidTitle] = useState<string>("Request Payment");
 
     return (
         <SafeAreaView
@@ -66,10 +76,10 @@ const FirstTab = ({
     setActiveTab,
     setFluidTitle,
 }: {
-    selectAssetSheet: any;
-    selectedAsset: any;
-    setActiveTab: any;
-    setFluidTitle: any;
+    selectAssetSheet: LegacyRef<RBSheetRef> | any;
+    selectedAsset: AssetListTypes | null;
+    setActiveTab: Dispatch<SetStateAction<number>>;
+    setFluidTitle: Dispatch<SetStateAction<string>>;
 }) => {
     useEffect(() => {
         setFluidTitle("Request Payment");
@@ -175,11 +185,10 @@ const FirstTab = ({
 };
 
 const SecondTab = ({
-    setActiveTab,
     setFluidTitle,
 }: {
-    setActiveTab: any;
-    setFluidTitle: any;
+    setActiveTab: Dispatch<SetStateAction<number>>;
+    setFluidTitle: Dispatch<SetStateAction<string>>;
 }) => {
     useEffect(() => {
         setFluidTitle("Send Link");

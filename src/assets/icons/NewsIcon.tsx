@@ -3,7 +3,7 @@ import Svg, { Path, G } from "react-native-svg";
 const NewsIcon = ({ color }: { color?: string }) => {
     return (
         <>
-            <Svg width="22" height="22" viewBox="0 0 28 28">
+            <Svg width="24" height="24" viewBox="0 0 28 28">
                 <G stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                     <G
                         id="ic_fluent_news_28_filled"

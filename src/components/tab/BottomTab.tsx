@@ -2,7 +2,8 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { bottomTabButtons } from "../../data/bottomTabButtons";
-import { Nav } from "../../utils/types";
+import { BottomTabButtonTypes, Nav } from "../../utils/types";
+import { defaultAppGreen } from "../../styles/const";
 
 function BottomTab() {
     const { name } = useRoute();
@@ -10,32 +11,39 @@ function BottomTab() {
 
     return (
         <View style={styles.bottomTab}>
-            {bottomTabButtons.map((button: any, index: number) => {
-                const active = name === button.routeTitle ? true : false;
-                return (
-                    <Pressable
-                        style={styles.bottomTab.tabButton}
-                        key={index}
-                        onPress={() => navigate(button.routeTitle)}
-                    >
+            {bottomTabButtons.map(
+                (button: BottomTabButtonTypes, index: number) => {
+                    const active = name === button.routeTitle ? true : false;
+                    return (
                         <Pressable
-                            style={styles.bottomTab.tabButton.iconButton}
+                            style={styles.bottomTab.tabButton}
+                            key={index}
                             onPress={() => navigate(button.routeTitle)}
                         >
-                            {button.icon(active)}
+                            <Pressable
+                                style={
+                                    button.routeTitle === "ScanCode"
+                                        ? styles.bottomTab.tabButton
+                                              .bigIconButton
+                                        : {}
+                                }
+                                onPress={() => navigate(button.routeTitle)}
+                            >
+                                {button.icon(active)}
+                            </Pressable>
+                            {/* <Text
+                                style={
+                                    name === button.routeTitle
+                                        ? styles.bottomTab.tabButton.activeText
+                                        : styles.bottomTab.tabButton.text
+                                }
+                            >
+                                {button.title}
+                            </Text> */}
                         </Pressable>
-                        <Text
-                            style={
-                                name === button.routeTitle
-                                    ? styles.bottomTab.tabButton.activeText
-                                    : styles.bottomTab.tabButton.text
-                            }
-                        >
-                            {button.title}
-                        </Text>
-                    </Pressable>
-                );
-            })}
+                    );
+                },
+            )}
         </View>
     );
 }
@@ -45,22 +53,20 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 0,
         width: "100%",
-        display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        padding: 5,
+        alignItems: "center",
+        padding: 3,
+        paddingTop: 5,
+        paddingBottom: 5,
         paddingLeft: 15,
         paddingRight: 15,
         borderTopWidth: 0.5,
-        borderColor: "rgba(0,0,0,0.25)",
+        borderColor: "rgba(0,0,0,0.15)",
         backgroundColor: "#ffffff",
         tabButton: {
-            padding: 10,
-            paddingLeft: 16,
-            paddingRight: 16,
-            paddingBottom: 10,
+            padding: 15,
             alignItems: "center",
-            iconButton: {},
             text: {
                 color: "#878787",
                 textAlign: "center",
@@ -70,12 +76,21 @@ const styles = StyleSheet.create({
                 fontSize: 11,
             },
             activeText: {
-                color: "#ffffff",
+                color: defaultAppGreen,
                 textAlign: "center",
                 paddingTop: 4,
                 fontFamily: "BricolageLight",
                 letterSpacing: 0.3,
                 fontSize: 11,
+            },
+            bigIconButton: {
+                width: 60,
+                height: 60,
+                borderRadius: 60,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#000000",
             },
         },
     },
