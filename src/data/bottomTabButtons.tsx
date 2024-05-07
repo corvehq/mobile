@@ -33,7 +33,7 @@ export const bottomTabButtons: BottomTabButtonTypes[] = [
     },
     {
         title: "News",
-        routeTitle: "News",
+        routeTitle: "NewsFeed",
         icon: (active: boolean) => (
             <NewsIcon color={active ? defaultAppGreen : "rgba(0,0,0,0.3)"} />
         ),

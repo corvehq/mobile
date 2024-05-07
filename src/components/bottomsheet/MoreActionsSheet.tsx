@@ -32,7 +32,7 @@ const MoreActionsSheet = ({
                     ...styles.bottomSheet,
                     wrapper: {
                         backgroundColor: "rgba(0,0,0,0.2)",
-                        padding: wp(0.5),
+                        padding: 0,
                     },
                     draggableIcon: {
                         backgroundColor: "grey",

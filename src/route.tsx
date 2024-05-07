@@ -35,6 +35,11 @@ import BuyDataScreen from "./screens/app/bills/BuyData";
 import BuyElectricityScreen from "./screens/app/bills/BuyElectricity";
 import InternetScreen from "./screens/app/bills/Internet";
 import TvSubscriptionScreen from "./screens/app/bills/TvSubscription";
+import ScanScreen from "./screens/app/scan/Scan";
+import HistoryScreen from "./screens/app/history/History";
+import InvoiceScreen from "./screens/app/history/Invoice";
+import NewsFeedScreen from "./screens/app/news/NewsFeed";
+import SingleNewsScreen from "./screens/app/news/SingleNews";
 
 const Stack = createStackNavigator();
 const TransitionScreenOptions = {
@@ -189,6 +194,34 @@ const AppNavigation = () => {
                             component={ConfirmAirtimePurchaseScreen}
                         />
                         {/* End of Utilities Screens */}
+
+                        {/* History Screens */}
+                        <Stack.Screen
+                            name="History"
+                            component={HistoryScreen}
+                        />
+                        <Stack.Screen
+                            name="Invoice"
+                            component={InvoiceScreen}
+                        />
+                        {/* End of History Screens */}
+
+                        {/* News Screens */}
+                        <Stack.Screen
+                            name="NewsFeed"
+                            component={NewsFeedScreen}
+                        />
+                        <Stack.Screen
+                            name="SingleNews"
+                            component={SingleNewsScreen}
+                        />
+                        {/* End of News Screens */}
+
+                        <Stack.Screen
+                            name="ScanCode"
+                            component={ScanScreen}
+                            options={confirmScreenTransition}
+                        />
                     </Stack.Group>
                     {/* End of App Screens */}
                 </Stack.Navigator>

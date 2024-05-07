@@ -42,7 +42,7 @@ function BottomTab() {
                             </Text> */}
                         </Pressable>
                     );
-                },
+                }
             )}
         </View>
     );
